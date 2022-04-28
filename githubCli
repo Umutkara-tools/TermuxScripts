@@ -387,7 +387,8 @@ elif [[ $options == 2 ]];then
 			git add .
 			git commit -m 'new_update'
 			git config credential.helper store
-			git push https://github.com/$userName/$repoName.git
+			#git push https://github.com/$userName/$repoName.git
+			git push -u origin master
 	
 			logStatus=$(git log |wc -l)
 			commitStatus=$(git log |sed -n ${logStatus}p |grep -o "new" |wc -l)
