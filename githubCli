@@ -1,6 +1,7 @@
 #!/bin/bash
 # Aᴜᴛʜᴏʀ » UᴍᴜT KᴀRᴀ
 # https://t.me/umutkaratools
+# v1.0
 
 True='✅'
 False='❗'
@@ -289,7 +290,9 @@ printf "\n\n\e[32m
 \t║                                                   ║
 \t║ ${r}[${w}8${r}] ────────── ${w}Uꜱᴇʀɴᴀᴍᴇ Rᴇᴍᴏᴠᴇ ${r}────────────────── ${g}║
 \t║                                                   ║
-\t║ ${r}[${w}9${r}] ────────── ${y}Sᴄʀɪᴘᴛ Cʀᴇᴀᴛᴇ Sʜᴏʀᴛᴄᴜᴛ ${r}─────────── ${g}║
+\t║ ${r}[${w}9${r}] ────────── ${y}Sᴄʀɪᴘᴛ Uᴘᴅᴀᴛᴇ ${r}──────────────────── ${g}║
+\t║                                                   ║
+\t║ ${r}[${w}10${r}] ───────── ${y}Sᴄʀɪᴘᴛ Cʀᴇᴀᴛᴇ Sʜᴏʀᴛᴄᴜᴛ ${r}─────────── ${g}║
 \t║                                                   ║
 \t║ ${r}[${w}X${r}] ────────── ${g}Exɪᴛ ${r}───────────────────────────── ${g}║
 \t║                                                   ║
@@ -535,6 +538,13 @@ elif [[ $options == 8 ]];then
 	fi
 
 elif [[ $options == 9 ]];then
+	
+	# SCRİPT UPDATE
+
+	echo "KOMUT DEVRE DIŞI !!!"
+	_logout
+
+elif [[ $options == 10 ]];then
 
 	# Sᴄʀɪᴘᴛ Cʀᴇᴀᴛᴇ Sʜᴏʀᴛᴄᴜᴛ
 	if [[ ! -a $PREFIX/bin/$scriptName ]];then
