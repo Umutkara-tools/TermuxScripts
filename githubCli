@@ -276,8 +276,9 @@ printf "\n\n\e[32m
 \t║   ██    ██ ██    ██    ██   ██ ██    ██ ██   ██   ║
 \t║   ████████ ██    ██    ██   ██ ████████ ██████    ║
 \t║                                                   ║
+\t║\t\t\t\t\t       ${y}$version${g} ║
 \t╚═══════════════════════════════════════════════════╝
-\t║\e[97m $userNameStatusIcon $userName ${y}/ $repoStatusIcon ${w}$repoName \e[32m║
+\t║\e[97m $userNameStatusIcon $userName ${y}/ $repoStatusIcon ${w}$repoName ${g}║
 \t╚$border╝
 \t\t\t\t\t   ╔════════════════╗
 \t\t\t\t\t   ║${r} Ｏｐｔｉｏｎｓ ${g}║
