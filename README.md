@@ -6,7 +6,7 @@ bash githubCli
 
 bash herokuCli
 
-bash borderCreate
+bash fontsCreate
 
 ──────────────
 
