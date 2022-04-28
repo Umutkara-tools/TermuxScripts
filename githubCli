@@ -1,7 +1,9 @@
 #!/bin/bash
 # Aᴜᴛʜᴏʀ » UᴍᴜT KᴀRᴀ
 # https://t.me/umutkaratools
-# v1.0
+version="v1.0"
+
+#curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/githubCli |sed -n 4p | tr -d '# '
 
 True='✅'
 False='❗'
@@ -541,7 +543,10 @@ elif [[ $options == 9 ]];then
 	
 	# SCRİPT UPDATE
 
-	echo "KOMUT DEVRE DIŞI !!!"
+	scriptVersion=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/githubCli |sed -n 4p | tr -d '# ')
+
+	myScriptVersion=$(echo )
+	
 	_logout
 
 elif [[ $options == 10 ]];then
