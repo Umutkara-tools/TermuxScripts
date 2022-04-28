@@ -25,6 +25,35 @@ if [[ ! -a $PREFIX/bin/curl ]];then
 	pkg install curl -y
 fi
 
+function _autoUpdate () {
+
+	# SCRİPT UPDATE
+
+	scriptVersion=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName |sed -n 4p |awk -F '"' '{print $2}')
+	
+	myScriptVersion=$(cat $0 |sed -n 4p |awk -F '"' '{print $2}')
+
+	if [[ $scriptVersion != $myScriptVersion ]];then
+
+		scriptStatus=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName |sed -n 5p |awk -F '"' '{print $2}')
+		if [[ $scriptStatus == True ]];then
+			clear
+			printf "\n\n\n"
+			read -e -p $'\t\e[1;97mYᴇɴɪ Gᴜɴᴄᴇʟʟᴇᴍᴇ Bᴜʟᴜɴᴅᴜ Sᴄʀɪᴘᴛ Gᴜɴᴄᴇʟʟᴇɴꜱɪɴ Mɪ? \e[33m[ʏ/N] \e[97m] \e[32m~ \e[31m»»\e[97m ' update
+			if [[ $update == y || $update == Y ]];then
+				curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName > $0
+				printf "${g}
+				\r\t╔════════════════════════════════════════╗
+				\r\t║ ✅ ${w}Ｓｃｒｉｐｔ Ｇｕｎｃｅｌｌｅｎｄｉ ${g}║
+				\r\t╚════════════════════════════════════════╝\n\n\n"
+				exit
+			fi
+		fi
+	fi
+}
+
+_autoUpdate
+
 function _options () {
 	clear
 	printf "\n${r}
@@ -44,50 +73,11 @@ function _options () {
 	\r\t╔═══════════════════════════════════════════════════╗
 	\r\t║ 🔸 ${w}$scriptName -f monoSpace '𝙴x𝚊𝚖𝚙𝚕𝚎 W𝚘𝚛𝚍 𝙾𝚞𝚝𝚙𝚞𝚝' ${y}║
 	\r\t╚═══════════════════════════════════════════════════╝\n${g}
-	\r\t╔═══════════════════════════════════════╗
-	\r\t║  ${w}$scriptName --update ${g}|${y} Sᴄʀɪᴘᴛ Uᴘᴅᴀᴛᴇ ${g}║
-	\r\t╚═══════════════════════════════════════╝\n
 	\r\t╔══════════════════════════════════════════════╗
 	\r\t║  ${w}$scriptName --copy ${g}|${y} Sᴄʀɪᴘᴛ Cʀᴇᴀᴛᴇ Sʜᴏʀᴛᴄᴜᴛ ${g}║
 	\r\t╚══════════════════════════════════════════════╝\n\n\n"
 	exit
 }
-
-if [[ $1 == -u || $1 == --update ]];then
-
-	# SCRİPT UPDATE
-
-	scriptVersion=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName |sed -n 4p |awk -F '"' '{print $2}')
-
-	myScriptVersion=$(cat $0 |sed -n 4p |awk -F '"' '{print $2}')
-
-	if [[ $scriptVersion == $myScriptVersion ]];then
-		printf "${y}
-		\r\t╔════════════════════════╗
-		\r\t║ 🔸 ${w}Sᴄʀɪᴘᴛ Zᴀᴛᴇɴ Gᴜɴᴄᴇʟ ${y}║
-		\r\t╚════════════════════════╝\n\n\n"
-	else
-		scriptStatus=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName |sed -n 5p |awk -F '"' '{print $2}')
-		if [[ $scriptStatus == True ]];then
-			curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName > $0
-			printf "${g}
-			\r\t╔════════════════════════════════════════╗
-			\r\t║ ✅ ${w}Ｓｃｒｉｐｔ Ｇｕｎｃｅｌｌｅｎｄｉ ${g}║
-			\r\t╚════════════════════════════════════════╝\n\n\n"
-		else
-			printf "${g}
-			\r\t╔══════════════════════════╗
-			\r\t║ ❗ ${w}Sᴄʀɪᴘᴛ Gᴜɴᴄᴇʟʟᴇɴᴇᴍᴇᴅɪ ${g}║
-			\r\t╚══════════════════════════╝\n\n\n"
-			sleep 0.5
-			printf "\n\n\n${y}
-			\r\t╔════════════════════════╗
-			\r\t║ 🔸 ${w}Tᴇᴋʀᴀʀ Dᴇɴᴇʏɪɴɪᴢ... ${y}║
-			\r\t╚════════════════════════╝\n\n\n"
-		fi
-	fi
-	exit
-fi
 
 if [[ $1 == -c || $1 == --copy ]];then
 	
@@ -130,17 +120,17 @@ fi
 
 word=$(echo -e "$3")
 
-_letters="abccdefgghiijklmnoopqrsstuuvwxyzABCCDEFGGHIIJKLMNOOPQRSSTUUVWYXZ1234567890"
+_letters="abccdefgghiijklmnoopqrsstuuvwxyzABCCDEFGGHIIJKLMNOOPQRSSTUUVWXYZ1234567890"
 
 letters="abcçdefgğhıijklmnoöpqrsştuüvwxyzABCÇDEFGĞHİIJKLMNOÖPQRSŞTUÜVWXYZ1234567890"
 
-thinLetters="ａｂｃｃｄｅｆｇｇｈｉｉｊｋｌｍｎｏｏｐｑｒｓｓｔｕｕｖｗｘｙｚＡＢＣＣＤＥＦＧＧＨＩＩＪＫＬＭＮＯＯＰＱＲＳＳＴＵＵＶＷＹＸＺ１２３４５６７８９０"
+thinLetters="ａｂｃｃｄｅｆｇｇｈｉｉｊｋｌｍｎｏｏｐｑｒｓｓｔｕｕｖｗｘｙｚＡＢＣＣＤＥＦＧＧＨＩＩＪＫＬＭＮＯＯＰＱＲＳＳＴＵＵＶＷＸＹＺ１２３４５６７８９０"
 
 # SAYI PARANTEZ KARAKTERLER
 
-tinyLetters="ᴀʙᴄᴄᴅᴇғɢɢʜɪɪᴊᴋʟᴍɴᴏᴏᴘϙʀꜱꜱᴛᴜᴜᴠᴡxʏᴢABCCDEFGGHIIJKLMNOOPQRSSTUUVWYXZ𝟷𝟸𝟹𝟺𝟻𝟼𝟽𝟾𝟿𝟶"
+tinyLetters="ᴀʙᴄᴄᴅᴇғɢɢʜɪɪᴊᴋʟᴍɴᴏᴏᴘϙʀꜱꜱᴛᴜᴜᴠᴡxʏᴢABCCDEFGGHIIJKLMNOOPQRSSTUUVWXYZ𝟷𝟸𝟹𝟺𝟻𝟼𝟽𝟾𝟿𝟶"
 
-monoSpaceLetters="𝚊𝚋𝚌𝚌𝚍𝚎𝚏𝚐𝚐𝚑𝚒𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚘𝚙𝚚𝚛𝚜𝚜𝚝𝚞𝚞𝚟𝚠𝚡𝚢𝚣𝙰𝙱𝙲𝙲𝙳𝙴𝙵𝙶𝙶𝙷𝙸𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙾𝙿𝚀𝚁𝚂𝚂𝚃𝚄𝚄𝚅𝚆𝚈𝚇𝚉𝟷𝟸𝟹𝟺𝟻𝟼𝟽𝟾𝟿𝟶"
+monoSpaceLetters="𝚊𝚋𝚌𝚌𝚍𝚎𝚏𝚐𝚐𝚑𝚒𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚘𝚙𝚚𝚛𝚜𝚜𝚝𝚞𝚞𝚟𝚠𝚡𝚢𝚣𝙰𝙱𝙲𝙲𝙳𝙴𝙵𝙶𝙶𝙷𝙸𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙾𝙿𝚀𝚁𝚂𝚂𝚃𝚄𝚄𝚅𝚆𝚇𝚈𝚉𝟷𝟸𝟹𝟺𝟻𝟼𝟽𝟾𝟿𝟶"
 
 Status="False"
 

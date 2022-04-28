@@ -9,7 +9,7 @@ w='\e[1;97m'
 r='\e[1;31m'
 g='\e[1;32m'
 y='\e[1;33m'
-
+scriptName=`basename "$0"`
 
 if [[ $1 == -e || $1 == --edit  ]];then
 	if [[ -a $PREFIX/bin/vim ]];then
@@ -51,6 +51,35 @@ if [[ ! -a $PREFIX/bin/heroku ]];then
 	npm i -g heroku
 fi
 
+function _autoUpdate () {
+
+	# SCRİPT UPDATE
+
+	scriptVersion=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName |sed -n 4p |awk -F '"' '{print $2}')
+	
+	myScriptVersion=$(cat $0 |sed -n 4p |awk -F '"' '{print $2}')
+
+	if [[ $scriptVersion != $myScriptVersion ]];then
+
+		scriptStatus=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName |sed -n 5p |awk -F '"' '{print $2}')
+		if [[ $scriptStatus == True ]];then
+			clear
+			printf "\n\n\n"
+			read -e -p $'\t\e[1;97mYᴇɴɪ Gᴜɴᴄᴇʟʟᴇᴍᴇ Bᴜʟᴜɴᴅᴜ Sᴄʀɪᴘᴛ Gᴜɴᴄᴇʟʟᴇɴꜱɪɴ Mɪ? \e[33m[ʏ/N] \e[97m] \e[32m~ \e[31m»»\e[97m ' update
+			if [[ $update == y || $update == Y ]];then
+				curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName > $0
+				printf "${g}
+				\r\t╔════════════════════════════════════════╗
+				\r\t║ ✅ ${w}Ｓｃｒｉｐｔ Ｇｕｎｃｅｌｌｅｎｄｉ ${g}║
+				\r\t╚════════════════════════════════════════╝\n\n\n"
+				exit
+			fi
+		fi
+	fi
+}
+
+_autoUpdate
+
 printf "\n${y}
 \r\t╔═════════════════════════╗
 \r\t║ 🔸 ${w}Lᴜᴛғᴇɴ Bᴇᴋʟᴇʏɪɴɪᴢ... ${y}║
@@ -68,7 +97,6 @@ fi
 
 whoamiNameCount=$(echo "$whoamiName" |wc -m)
 
-scriptName=`basename "$0"`
 appName="No App"
 appNameCount=$(echo "$appName" |wc -m)
 
@@ -278,9 +306,7 @@ printf "\n\n\e[32m
 \t║                                                   ║
 \t║ ${r}[${w}7${r}] ────────── ${w}Aᴘᴘ Gɪᴛ Cʟᴏɴᴇ ${r}──────────────────── ${g}║
 \t║                                                   ║
-\t║ ${r}[${w}8${r}] ────────── ${y}Sᴄʀɪᴘᴛ Uᴘᴅᴀᴛᴇ ${r}──────────────────── ${g}║
-\t║                                                   ║
-\t║ ${r}[${w}9${r}] ────────── ${y}Sᴄʀɪᴘᴛ Cʀᴇᴀᴛᴇ Sʜᴏʀᴛᴄᴜᴛ ${r}─────────── ${g}║
+\t║ ${r}[${w}8${r}] ────────── ${y}Sᴄʀɪᴘᴛ Cʀᴇᴀᴛᴇ Sʜᴏʀᴛᴄᴜᴛ ${r}─────────── ${g}║
 \t║                                                   ║
 \t║ ${r}[${w}X${r}] ────────── ${g}Exɪᴛ ${r}───────────────────────────── ${g}║
 \t║                                                   ║
@@ -494,42 +520,6 @@ elif [[ $options == 7 ]];then
 	_logout
 
 elif [[ $options == 8 ]];then
-
-	# SCRİPT UPDATE
-
-	scriptVersion=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName |sed -n 4p |awk -F '"' '{print $2}')
-	
-	myScriptVersion=$(cat $0 |sed -n 4p |awk -F '"' '{print $2}')
-
-	if [[ $scriptVersion == $myScriptVersion ]];then
-		printf "${y}
-		\r\t╔════════════════════════╗
-		\r\t║ 🔸 ${w}Sᴄʀɪᴘᴛ Zᴀᴛᴇɴ Gᴜɴᴄᴇʟ ${y}║
-		\r\t╚════════════════════════╝\n\n\n"
-		_logout
-	else
-		scriptStatus=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName |sed -n 5p |awk -F '"' '{print $2}')
-		if [[ $scriptStatus == True ]];then
-			curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName > $0
-			printf "${g}
-			\r\t╔════════════════════════════════════════╗
-			\r\t║ ✅ ${w}Ｓｃｒｉｐｔ Ｇｕｎｃｅｌｌｅｎｄｉ ${g}║
-			\r\t╚════════════════════════════════════════╝\n\n\n"
-		else
-			printf "${g}
-			\r\t╔══════════════════════════╗
-			\r\t║ ❗ ${w}Sᴄʀɪᴘᴛ Gᴜɴᴄᴇʟʟᴇɴᴇᴍᴇᴅɪ ${g}║
-			\r\t╚══════════════════════════╝\n\n\n"
-			sleep 0.5
-			printf "\n\n\n${y}
-			\r\t╔════════════════════════╗
-			\r\t║ 🔸 ${w}Tᴇᴋʀᴀʀ Dᴇɴᴇʏɪɴɪᴢ... ${y}║
-			\r\t╚════════════════════════╝\n\n\n"
-		fi
-	fi
-	exit
-
-elif [[ $options == 9 ]];then
 
 	# Sᴄʀɪᴘᴛ Cʀᴇᴀᴛᴇ Sʜᴏʀᴛᴄᴜᴛ
 	if [[ ! -a $PREFIX/bin/$scriptName ]];then
