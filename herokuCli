@@ -1,6 +1,9 @@
 #!/bin/bash
 # Aᴜᴛʜᴏʀ » UᴍᴜT KᴀRᴀ
 # https://t.me/umutkaratools
+version="v1.0"
+scriptStatus="True"
+
 
 w='\e[1;97m'
 r='\e[1;31m'
@@ -253,6 +256,7 @@ printf "\n\n\e[32m
 \t║ ██   ██ ██      ██   ██ ██    ██ ██  ██  ██    ██ ║
 \t║ ██   ██ ███████ ██   ██  ██████  ██   ██ ████████ ║
 \t║                                                   ║
+\t║\t\t\t\t\t       ${y}$version${g} ║
 \t╚═══════════════════════════════════════════════════╝
 \t║\e[97m $whoamiStatusIcon $whoamiName ${y}/ $appStatusIcon ${w}$appName \e[32m║
 \t╚$border╝
@@ -274,7 +278,9 @@ printf "\n\n\e[32m
 \t║                                                   ║
 \t║ ${r}[${w}7${r}] ────────── ${w}Aᴘᴘ Gɪᴛ Cʟᴏɴᴇ ${r}──────────────────── ${g}║
 \t║                                                   ║
-\t║ ${r}[${w}8${r}] ────────── ${y}Sᴄʀɪᴘᴛ Cʀᴇᴀᴛᴇ Sʜᴏʀᴛᴄᴜᴛ ${r}─────────── ${g}║
+\t║ ${r}[${w}8${r}] ────────── ${y}Sᴄʀɪᴘᴛ Uᴘᴅᴀᴛᴇ ${r}──────────────────── ${g}║
+\t║                                                   ║
+\t║ ${r}[${w}9${r}] ────────── ${y}Sᴄʀɪᴘᴛ Cʀᴇᴀᴛᴇ Sʜᴏʀᴛᴄᴜᴛ ${r}─────────── ${g}║
 \t║                                                   ║
 \t║ ${r}[${w}X${r}] ────────── ${g}Exɪᴛ ${r}───────────────────────────── ${g}║
 \t║                                                   ║
@@ -488,6 +494,42 @@ elif [[ $options == 7 ]];then
 	_logout
 
 elif [[ $options == 8 ]];then
+
+	# SCRİPT UPDATE
+
+	scriptVersion=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName |sed -n 4p |awk -F '"' '{print $2}')
+	
+	myScriptVersion=$(cat $0 |sed -n 4p |awk -F '"' '{print $2}')
+
+	if [[ $scriptVersion == $myScriptVersion ]];then
+		printf "${y}
+		\r\t╔════════════════════════╗
+		\r\t║ 🔸 ${w}Sᴄʀɪᴘᴛ Zᴀᴛᴇɴ Gᴜɴᴄᴇʟ ${y}║
+		\r\t╚════════════════════════╝\n\n\n"
+		_logout
+	else
+		scriptStatus=$(curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName |sed -n 5p |awk -F '"' '{print $2}')
+		if [[ $scriptStatus == True ]];then
+			curl -s https://raw.githubusercontent.com/Umutkara-tools/TermuxScripts/master/$scriptName > $0
+			printf "${g}
+			\r\t╔════════════════════════════════════════╗
+			\r\t║ ✅ ${w}Ｓｃｒｉｐｔ Ｇｕｎｃｅｌｌｅｎｄｉ ${g}║
+			\r\t╚════════════════════════════════════════╝\n\n\n"
+		else
+			printf "${g}
+			\r\t╔══════════════════════════╗
+			\r\t║ ❗ ${w}Sᴄʀɪᴘᴛ Gᴜɴᴄᴇʟʟᴇɴᴇᴍᴇᴅɪ ${g}║
+			\r\t╚══════════════════════════╝\n\n\n"
+			sleep 0.5
+			printf "\n\n\n${y}
+			\r\t╔════════════════════════╗
+			\r\t║ 🔸 ${w}Tᴇᴋʀᴀʀ Dᴇɴᴇʏɪɴɪᴢ... ${y}║
+			\r\t╚════════════════════════╝\n\n\n"
+		fi
+	fi
+	exit
+
+elif [[ $options == 9 ]];then
 
 	# Sᴄʀɪᴘᴛ Cʀᴇᴀᴛᴇ Sʜᴏʀᴛᴄᴜᴛ
 	if [[ ! -a $PREFIX/bin/$scriptName ]];then
