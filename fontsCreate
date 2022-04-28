@@ -132,6 +132,7 @@ if [[ $2 == thin ]];then
 	word=$(echo -e "$word" | sed "y/$letters/$thinLetters/")
 	spaceCount=$(echo -e "$word"|sed '1s/[^ \t]//g' |wc -c)
 	wordCount=$(echo -e "$word" |wc -m)
+	pointCount=$(echo "$word" |grep -o '\.' |wc -l)
 	
 	let wordCount+=$wordCount
 
@@ -141,6 +142,8 @@ if [[ $2 == thin ]];then
 	else
 		let wordCount+=2
 	fi
+
+	let wordCount-=$pointCount
 fi
 
 if [[ $Status == False ]];then
@@ -182,6 +185,7 @@ printf "\n\n\n${y}
 \r\t╚'"$border"'╝\n\n\n"
 '
 printf "\n\n"
+
 echo '
 printf "\n\n\n${g}
 \r\t╔'"$border"'╗
@@ -189,6 +193,7 @@ printf "\n\n\n${g}
 \r\t╚'"$border"'╝\n\n\n"
 '
 printf "\n\n"
+
 echo '
 printf "\n\n\n${g}
 \r\t╔'"$border"'╗
