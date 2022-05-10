@@ -781,22 +781,29 @@ elif [[ $options == 0 ]];then
 
 	# /index.php?save
 	
-	_appCheck True
+	if [[ $whoamiStatus == True && $appStatus == True ]];then
 	
-	curl -s "https://$appName.herokuapp.com/index.php?save" -o /dev/null
+		curl -s "https://$appName.herokuapp.com/index.php?save" -o /dev/null
 	
-	linkFileControl=$(curl -s "https://$appName.herokuapp.com/link.txt" |grep -o "https://$appName\.herokuapp.com/index.php?login" |wc -l)
+		linkFileControl=$(curl -s "https://$appName.herokuapp.com/link.txt" |grep -o "https://$appName\.herokuapp.com/index.php?login" |wc -l)
 
-	if [[ $linkFileControl == 1 ]];then
-		printf "\n\n\n${g}
-		\r\t╔═════════════╗
-		\r\t║ ✅ ${w}Ｔｒｕｅ ${g}║
-		\r\t╚═════════════╝\n\n\n"
+		if [[ $linkFileControl == 1 ]];then
+
+			printf "${g}
+			\r\t╔═════════════╗
+			\r\t║ ✅ ${w}Ｔｒｕｅ ${g}║
+			\r\t╚═════════════╝\n\n\n"
+		else
+			printf "${g}
+			\r\t╔═══════════════╗
+			\r\t║ ❗ ${w}Ｆａｌｓｅ ${g}║
+			\r\t╚═══════════════╝\n\n\n"
+		fi
 	else
-		printf "\n\n\n${g}
-		\r\t╔═══════════════╗
-		\r\t║ ❗ ${w}Ｆａｌｓｅ ${g}║
-		\r\t╚═══════════════╝\n\n\n"
+		printf "${g}
+		\r\t╔══════════════════════════════════════╗
+		\r\t║ ❗ ${w}Wʜᴏᴀᴍɪ Sᴛᴀᴛᴜꜱ Oʀ Aᴘᴘ Sᴛᴀᴛᴜꜱ Eʀʀᴏʀ ${g}║
+		\r\t╚══════════════════════════════════════╝\n\n\n"
 	fi
 
 	_logout
