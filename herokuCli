@@ -1,7 +1,7 @@
 #!/bin/bash
 # Aᴜᴛʜᴏʀ » UᴍᴜT KᴀRᴀ
 # https://t.me/umutkaratools
-version="v1.2"
+version="v1.3"
 scriptStatus="True"
 
 w='\e[1;97m'
@@ -226,8 +226,8 @@ function _appCheck () {
 		fi
 
 		_advance () {
-			#appCheck=$(curl -s https://$appName.herokuapp.com |grep -o "www.herokucdn.com/error-pages/no-such-app.html" |wc -l)
 			appCheck=$(curl -s https://$appName.herokuapp.com |grep -o "www.herokucdn.com/error-pages/no-such-app.html" |wc -l)
+			#appCheck=$(curl -s https://$appName.herokuapp.com |wc -l)
 
 			if [[ $1 == True ]];then
 				if [[ $appCheck != 0 ]];then
@@ -239,7 +239,7 @@ function _appCheck () {
 					\r\t╚═══════════════════════════╝\n\n\n"
 				fi
 			else
-				if [[ $appCheck == 0 ]];then
+				if [[ $appCheck != 0 ]];then
 					Break="True"
 				else
 					printf "\n\n${g}
