@@ -435,10 +435,9 @@ if [[ $options == 1 ]];then
 	git init
 	git add .
 	git commit -m 'new update'
+	git branch -M main
 	git remote add origin https://github.com/$userName/$repoName.git
 	git config credential.helper store
-	git push -u origin main
-
 	git push -u origin main || {
 		printf "\n\n\n${g}
 		\r\t╔════════════════════════╗
