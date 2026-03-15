@@ -440,6 +440,10 @@ if [[ $options == 1 ]];then
 	git branch -M main
 	git remote add origin https://github.com/$userName/$repoName.git
 	git config credential.helper store
+	
+	git config --global http.lowSpeedLimit 0
+	git config --global http.lowSpeedTime 999999
+	
 	git push -u origin main || {
 		printf "\n\n\n${g}
 			\r\t╔═══════════════════════╗
@@ -504,8 +508,6 @@ elif [[ $options == 2 ]];then
 			git add .
 			git commit -m 'new_update'
 			git config credential.helper store
-			#git push https://github.com/$userName/$repoName.git
-			#git push -u origin main
 
 			git config --global http.lowSpeedLimit 0
 			git config --global http.lowSpeedTime 999999
