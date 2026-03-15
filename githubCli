@@ -507,11 +507,15 @@ elif [[ $options == 2 ]];then
 			#git push https://github.com/$userName/$repoName.git
 			#git push -u origin main
 
+			git config --global http.lowSpeedLimit 0
+			git config --global http.lowSpeedTime 999999
+
 			git push -u origin $branch || {
 				printf "${g}
 				\r\t╔══════════════════════════╗
 				\r\t║ ❗ ${w}Gᴜɴᴄᴇʟʟᴇᴍᴇ Yᴀᴘɪʟᴀᴍᴀᴅɪ ${g}║
 				\r\t╚══════════════════════════╝\n\n\n"
+
 				_logout
 			}
 
