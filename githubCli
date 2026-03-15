@@ -1,7 +1,7 @@
 #!/bin/bash
 # Aᴜᴛʜᴏʀ » UᴍᴜT KᴀRᴀ
 # https://t.me/umutkaratools
-version="v2.0"
+version="v2.1"
 scriptStatus="True"
 
 True='✅'
@@ -107,7 +107,7 @@ if [[ $repoControl == 1 ]];then
 	repoStatusIcon="✅"
 	if [[ -s  $HOME/.git-credentials ]];then
 		userNameToken=$(cat $HOME/.git-credentials |awk -F ":" '{print $2}' |tr -d '/')
-		if [[ $userName == $userNameToken ]];then
+		if [[ "${userName,,}" =~ ^"${userNameToken,,}"$ ]]; then
 			sessionControl="False"
 			userNameStatusIcon="✅"
 			repoStatusIcon="✅"
