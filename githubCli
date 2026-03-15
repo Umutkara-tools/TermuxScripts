@@ -140,7 +140,7 @@ if [[ -s  $HOME/.github-sessions ]];then
 		for count in `seq 1 $sessionCount`
 		do
 			userNames=$(cat $HOME/.github-sessions |sed -n ${count}p |awk -F ":" '{print $2}' |tr -d '/')
-			if [[ $userName == $userNames ]];then
+			if [[ "${userName,,}" =~ ^"${userNames,,}"$ ]]; then
 				selected=$(cat $HOME/.github-sessions |sed -n ${count}p)
 				echo "$selected" > $HOME/.git-credentials
 				userName=$(cat $HOME/.git-credentials |awk -F ":" '{print $2}' |tr -d '/')
